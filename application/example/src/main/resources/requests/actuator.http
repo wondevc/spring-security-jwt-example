@@ -1,0 +1,7 @@
+###
+GET {{host}}:{{port}}/actuator
+Content-Type: application/json
+
+###
+GET {{host}}:{{port}}/actuator/health
+Content-Type: application/json
