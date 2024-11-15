@@ -10,9 +10,15 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":external-jwt"))
+
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
+    implementation("io.jsonwebtoken:jjwt-api:0.12.6")
 }
 
 tasks {

@@ -5,3 +5,6 @@ management:
   endpoint:
     health:
       enabled: true
+
+jwt:
+  secret: ZmNkZjBlYWNmODM5Nzk2MGRlMmE1YmQ3NjZiZTRkYzUxNTI2ZDE5NGExZDgyZjBiZjg2MGZjMzZlMTY2ZWUzMDA4MDRkZDYzMjIyYTQ5MmUzMDJkMzEzODEwNWJjYzhkOTVjMmM1YTBmODIyMjcxYWQ3YjNhOTU3M2ZmYjdlNzA=
