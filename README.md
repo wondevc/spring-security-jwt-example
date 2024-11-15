@@ -25,7 +25,7 @@ Features
 
 APIs
 ----
-
+[Http Clients](./application/example/src/main/resources/requests)
 
 
 Installation
