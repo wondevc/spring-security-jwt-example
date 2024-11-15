@@ -8,6 +8,7 @@ import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.web.server.SecurityWebFilterChain
 import org.springframework.security.web.server.authentication.AuthenticationWebFilter
 import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository
+import org.springframework.web.cors.reactive.CorsConfigurationSource
 
 @Configuration
 @EnableWebFluxSecurity
@@ -15,6 +16,7 @@ class SpringSecurityConfiguration {
     @Bean
     fun securityWebFilterChain(
         http: ServerHttpSecurity,
+        corsConfiguration: CorsConfigurationSource,
         exchangeMatchers: List<SpringSecurityServerWebExchangeMatcher>,
         jwtAuthenticationWebFilter: AuthenticationWebFilter,
     ): SecurityWebFilterChain = http
@@ -25,7 +27,7 @@ class SpringSecurityConfiguration {
         }
         .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
         .csrf { it.disable() }
-        .cors { it.disable() }
+        .cors { it.configurationSource(corsConfiguration) }
         .httpBasic { it.disable() }
         .formLogin { it.disable() }
         .logout { it.disable() }
