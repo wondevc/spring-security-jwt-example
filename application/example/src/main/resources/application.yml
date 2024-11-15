@@ -3,6 +3,11 @@ spring:
     default: local
     active: ${spring.profiles.default}
 
+management:
+  endpoint:
+    health:
+      enabled: false
+
 logging:
   level:
     root: INFO
