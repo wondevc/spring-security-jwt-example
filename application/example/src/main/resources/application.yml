@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    default: local
+    active: ${spring.profiles.default}
+
+logging:
+  level:
+    root: INFO
