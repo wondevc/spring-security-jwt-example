@@ -15,6 +15,7 @@ class SpringSecurityConfiguration {
     @Bean
     fun securityWebFilterChain(
         http: ServerHttpSecurity,
+        exchangeMatchers: List<SpringSecurityServerWebExchangeMatcher>,
         jwtAuthenticationWebFilter: AuthenticationWebFilter,
     ): SecurityWebFilterChain = http
         .headers { headers -> headers
@@ -28,8 +29,20 @@ class SpringSecurityConfiguration {
         .httpBasic { it.disable() }
         .formLogin { it.disable() }
         .logout { it.disable() }
-        .authorizeExchange {
-            it.anyExchange().permitAll()
+        .authorizeExchange { exchange -> exchange
+            .apply {
+                exchangeMatchers
+                    .flatMap { it.getPermitAllMatchers() }
+                    .takeUnless { it.isEmpty() }
+                    ?.let { matchers(*it.toTypedArray()).permitAll() }
+
+                exchangeMatchers
+                    .flatMap { it.getDenyAllMatchers() }
+                    .takeUnless { it.isEmpty() }
+                    ?.let { matchers(*it.toTypedArray()).denyAll() }
+
+                anyExchange().authenticated()
+            }
         }
         .addFilterAt(jwtAuthenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
         .build()
